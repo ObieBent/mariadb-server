@@ -1,0 +1,8 @@
+[mariadb]
+name = MariaDB
+baseurl = {{ mysql_redhat_repo }}
+gpgkey={{ mysql_redhat_repo_key }}
+{% if ansible_distribution_major_version | int > 7 %}
+module_hotfixes=1
+{% endif %}
+gpgcheck=1
