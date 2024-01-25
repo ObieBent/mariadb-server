@@ -1,10 +1,10 @@
 ---
 
 # Install MySQL if not yet installed
-- include: percona-repo.yml
+- include_tasks: percona-repo.yml
   when: mysql_flavor == "percona"
 
-- include: mariadb-repo.yml
+- include_tasks: mariadb-repo.yml
   when: mysql_flavor == "mariadb"
 
 - stat:

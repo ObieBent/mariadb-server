@@ -14,44 +14,44 @@
 
 
 # MySQL Server configs
-- include: config.yml
+- include_tasks: config.yml
   tags: config
 
 # MySQL Server per OS configs
-- include: "{{ ansible_os_family }}.yml"
+- include_tasks: "{{ ansible_os_family }}.yml"
   tags: config
 
 # MySQL Server install and settings
-- include: install.yml
+- include_tasks: install.yml
   tags: setup
 
 # Create DBs and user
-- include: dbs.yml
+- include_tasks: dbs.yml
   when: mysql_databases|length > 0
   tags:
     - create_dbs
     - setup
 
 # Create only users
-- include: users.yml
+- include_tasks: users.yml
   when: mysql_users|length > 0
   tags:
     - create_users
     - setup
 
-- include: configure_monitoring.yml
+- include_tasks: configure_monitoring.yml
   tags: monitoring
   when: monitoring_nagios_enable
 
-- include: configure_pmm.yml
+- include_tasks: configure_pmm.yml
   tags: monitoring
   when: monitoring_pmm_enable
 
-- include: configure_logrotate.yml
+- include_tasks: configure_logrotate.yml
   tags:
     - config
     - configure_logrotate
 
 # Deploy admin scripts
-- include: script.yml
+- include_tasks: script.yml
   tags: script
